@@ -29,21 +29,21 @@ modules:
     output:
       type: proto:contract.v1.Transfers
 
-  # - name:
-  #   kind:
-  #   initialBlock: 15000000
-  #   updatePolicy:
-  #   valueType:
-  #   inputs:
-  #     - map:
+  - name: store_transfer_volume
+    kind: store
+    initialBlock: 15000000
+    updatePolicy: add
+    valueType: int64
+    inputs:
+      - map: map_apes
 
-  # - name:
-  #   kind:
-  #   initialBlock: 15000000
-  #   inputs:
-  #     - store:
-  #     - map:
-  #   output:
-  #     type: proto:sf.substreams.entity.v1.EntityChanges
+  - name: graph_out
+    kind: map
+    initialBlock: 15000000
+    inputs:
+      - store: store_transfer_volume
+      - map: map_apes
+    output:
+      type: proto:sf.substreams.entity.v1.EntityChanges
 
 network: mainnet
